@@ -18,19 +18,25 @@ const ExpenseForm = (props) => {
     const dateChangeHandler = (event) =>{
         setEnteredDate(event.target.value);
     };
+    const resetHandler=()=>{
+        setEnteredTitel('');
+        setEnteredAmount('');
+        setEnteredDate('');
 
+    };
     const submitHandler = (event) =>{
         event.preventDefault();
+        if(enteredTitel.trim().length===0||enteredAmount.trim().length===0){
+            resetHandler();
+            return;
+        }
         const ExpenseData = {
             title: enteredTitel,
             amount: enteredAmount,
             date: new Date(enteredDate)
         };
-        //console.log(12);
         props.onGetDataOfMine(ExpenseData);
-        setEnteredTitel('');
-        setEnteredAmount('');
-        setEnteredDate('');
+        resetHandler();
     };
 
     
